@@ -1,0 +1,1 @@
+command to serve with tls: mkdocs serve --dev-addr=0.0.0.0:443 --ssl-key=key.pem --ssl-cert=cert.pem

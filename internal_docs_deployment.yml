@@ -1,0 +1,25 @@
+# need to create a secret on kubernetes since the image is in a private repo cmd : `kubectl create secret generic`
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: internal_docs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: internal_docs
+  template:
+    metadata:
+      labels:
+        app: internal_docs
+    spec:
+      containers:
+      - name: internal_docs
+        image: azouiten/django_exo
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          value: "internal_docs.settings"
+          imagePullSecrets:
+          - name: secret
